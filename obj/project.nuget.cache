@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "migU92NHa8f25dkwmoe4KPuMppgGJrouFamVRfmc/Ay0X2BASqN9OT+J6FtdjlYjJecE3THrNfkqsNwE2CM05Q==",
+  "success": true,
+  "projectFilePath": "/Users/antoineheinrich/Desktop/dotNET/tower-defense/tower-defense.csproj",
+  "expectedPackageFiles": [
+    "/Users/antoineheinrich/.nuget/packages/consolegui/1.4.0/consolegui.1.4.0.nupkg.sha512"
+  ],
+  "logs": []
+}
