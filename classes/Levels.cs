@@ -11,8 +11,16 @@ namespace tower_defense
             };
         */
 
+        private List<IEnnemie> Ennemies = new List<IEnnemie>();
+
         public Levels()
         {
+            Infanterie inf = new Infanterie("soldat",null);
+            Char char1 = new Char("Char",null);
+            Ennemies.AddRange(new List<IEnnemie>
+                {inf,char1}
+            );
+            Console.WriteLine(Ennemies[1].Puissance);
         }
     }
 }
