@@ -33,19 +33,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/antoineheinrich/.nuget/packages/": {}
+    "C:\\Users\\dyklan\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/antoineheinrich/Desktop/dotNET/tower-defense/tower-defense.csproj",
+      "projectUniqueName": "E:\\Bibliotheque\\Documents\\GIT\\tower-defense\\tower-defense.csproj",
       "projectName": "tower-defense",
-      "projectPath": "/Users/antoineheinrich/Desktop/dotNET/tower-defense/tower-defense.csproj",
-      "packagesPath": "/Users/antoineheinrich/.nuget/packages/",
-      "outputPath": "/Users/antoineheinrich/Desktop/dotNET/tower-defense/obj/",
+      "projectPath": "E:\\Bibliotheque\\Documents\\GIT\\tower-defense\\tower-defense.csproj",
+      "packagesPath": "C:\\Users\\dyklan\\.nuget\\packages\\",
+      "outputPath": "E:\\Bibliotheque\\Documents\\GIT\\tower-defense\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/antoineheinrich/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\dyklan\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
@@ -89,7 +89,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.203/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.200\\RuntimeIdentifierGraph.json"
       }
     }
   }

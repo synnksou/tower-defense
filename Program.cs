@@ -1,4 +1,7 @@
 ﻿using System;
+using ConsoleGUI;
+using ConsoleGUI.Controls;
+using ConsoleGUI.Space;
 
 namespace tower_defense
 {
@@ -6,7 +9,12 @@ namespace tower_defense
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Game game = new Game();
+            ConsoleManager.Setup();
+
+            ConsoleManager.Resize(new Size(150, 40));
+            ConsoleManager.Content = new TextBlock { Text = "Hello world" };
+
         }
     }
 }
