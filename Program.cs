@@ -9,7 +9,8 @@ namespace tower_defense
         static void Main(string[] args)
         {
             Game game = new Game();
-            //MainWindow window = new MainWindow();
+            //test passage données a la fenetre
+            MainWindow window = new MainWindow(game.getLevels().getEnnemies());
         }
     }
 

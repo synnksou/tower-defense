@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Terminal.Gui;
 using NStack;
 
@@ -6,7 +8,7 @@ namespace tower_defense
     class MainWindow
     {
 
-        public MainWindow()
+        public MainWindow(List<IEnnemie> Ennemies)
         {
             Application.Init();
             var top = Application.Top;
@@ -44,9 +46,9 @@ namespace tower_defense
                 var n = MessageBox.Query(50, 7, "Quitter le jeu", "Etes vous sure de vouloir quitter le jeu", "oui", "non");
                 return n == 0;
             }
-            /*
-            var login = new Label("Login: ") { X = 3, Y = 2 };
-            var password = new Label("Password: ")
+            
+            var login = new Label(Ennemies[0].Nom + Ennemies[0].Puissance + Ennemies[0].Vie) { X = 3, Y = 2 };
+            /*var password = new Label("Password: ")
             {
                 X = Pos.Left(login),
                 Y = Pos.Top(login) + 1
@@ -68,7 +70,7 @@ namespace tower_defense
             // Add some controls, 
             win.Add(
                 // The ones with my favorite layout system, Computed
-                //login, password, loginText, passText,
+                login,//, password, loginText, passText,
 
                 // The ones laid out like an australopithecus, with Absolute positions:
                 //new CheckBox(3, 6, "Remember me"),

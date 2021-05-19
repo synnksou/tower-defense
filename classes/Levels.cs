@@ -22,5 +22,7 @@ namespace tower_defense
             );
             Console.WriteLine(Ennemies[1].Puissance);
         }
+
+        public List<IEnnemie> getEnnemies(){return Ennemies;}
     }
 }

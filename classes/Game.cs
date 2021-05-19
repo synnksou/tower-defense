@@ -20,5 +20,7 @@ namespace tower_defense
             this.levels = new Levels();    
             Console.WriteLine("game init");
         }
+
+        public Levels getLevels(){return this.levels;}
     }
 }
