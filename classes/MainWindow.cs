@@ -7,7 +7,7 @@ namespace tower_defense
 {
     class MainWindow
     {
-      
+
         public MainWindow(List<IEnnemie> Ennemies)
         {
             Application.Init();
@@ -95,8 +95,17 @@ namespace tower_defense
                 Height = Dim.Fill()
             };
             var stringCredit = new String("L'application Tower-Defense a été realisé en colaboration avec Flinois Dyklan, Brailly Julien, Heinrich Antoine ");
+            var stringCreditAntoine = new String("Developpeur   Heinrich Antoine");
+            var stringCreditDyklan = new String("Developpeur   Flinois Dyklan");
+            var stringCreditJulien = new String("Developpeur   Brailly Julien");
             var credit = new Label(stringCredit) { X = 3, Y = 3 };
+            var creditAntoine = new Label(stringCreditAntoine) { X = 3, Y = 5 };
+            var creditDyklan = new Label(stringCreditDyklan) { X = 3, Y = 6 };
+            var creditJulien = new Label(stringCreditJulien) { X = 3, Y = 7 };
             creditWindows.Add(credit);
+            creditWindows.Add(creditAntoine);
+            creditWindows.Add(creditDyklan);
+            creditWindows.Add(creditJulien);
             top.Add(creditWindows);
             Application.Run(top);
         }
