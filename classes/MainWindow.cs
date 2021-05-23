@@ -7,14 +7,14 @@ namespace tower_defense
 {
     class MainWindow
     {
-
+      
         public MainWindow(List<IEnnemie> Ennemies)
         {
             Application.Init();
             var top = Application.Top;
 
             // Creates the top-level window to show
-            var win = new Window("MyApp")
+            var win = new Window("tower-defense")
             {
                 X = 0,
                 Y = 1, // Leave one row for the toplevel menu
@@ -31,6 +31,7 @@ namespace tower_defense
                new MenuBarItem ("quitter", new MenuItem [] {
                     /*new MenuItem ("_New", "Creates new file", null),
                     new MenuItem ("_Close", "",null),*/
+                    new MenuItem("Credit","", () => Credit()),
                     new MenuItem ("quitter", "", () => { if (Quit ()) top.Running = false; })
                 }),/*
                 new MenuBarItem ("_Edit", new MenuItem [] {
@@ -46,7 +47,6 @@ namespace tower_defense
                 var n = MessageBox.Query(50, 7, "Quitter le jeu", "Etes vous sure de vouloir quitter le jeu", "oui", "non");
                 return n == 0;
             }
-            
             var login = new Label(Ennemies[0].Nom + Ennemies[0].Puissance + Ennemies[0].Vie) { X = 3, Y = 2 };
             /*var password = new Label("Password: ")
             {
@@ -82,6 +82,23 @@ namespace tower_defense
 
             Application.Run();
 
+        }
+
+        static void Credit()
+        {
+            var top = Application.Top;
+            var creditWindows = new Window("Credit")
+            {
+                X = 0,
+                Y = 1,
+                Width = Dim.Fill(),
+                Height = Dim.Fill()
+            };
+            var stringCredit = new String("L'application Tower-Defense a été realisé en colaboration avec Flinois Dyklan, Brailly Julien, Heinrich Antoine ");
+            var credit = new Label(stringCredit) { X = 3, Y = 3 };
+            creditWindows.Add(credit);
+            top.Add(creditWindows);
+            Application.Run(top);
         }
 
     }
