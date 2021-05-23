@@ -1,7 +1,6 @@
 ﻿using System;
-using ConsoleGUI;
-using ConsoleGUI.Controls;
-using ConsoleGUI.Space;
+using Terminal.Gui;
+using NStack;
 
 namespace tower_defense
 {
@@ -10,11 +9,9 @@ namespace tower_defense
         static void Main(string[] args)
         {
             Game game = new Game();
-            ConsoleManager.Setup();
-
-            ConsoleManager.Resize(new Size(150, 40));
-            ConsoleManager.Content = new TextBlock { Text = "Hello world" };
-
+            //test passage données a la fenetre
+            MainWindow window = new MainWindow(game.getLevels().getEnnemies());
         }
     }
+
 }

@@ -41,6 +41,10 @@
             "ConsoleGUI": {
               "target": "Package",
               "version": "[1.4.0, )"
+            },
+            "Terminal.Gui": {
+              "target": "Package",
+              "version": "[1.1.1, )"
             }
           },
           "imports": [
