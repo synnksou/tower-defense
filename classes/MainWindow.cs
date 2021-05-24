@@ -14,6 +14,7 @@ namespace tower_defense
             var top = Application.Top;
 
             // Creates the top-level window to show
+            var player = new Player();
             var win = new Window("tower-defense")
             {
                 X = 0,
@@ -24,22 +25,6 @@ namespace tower_defense
                 Height = Dim.Fill()
             };
             top.Add(win);
-
-            // Creates a menubar, the item "New" has a help menu.
-            var menu = new MenuBar(new MenuBarItem[] {
-               new MenuBarItem ("quitter", new MenuItem [] {
-                    /*new MenuItem ("_New", "Creates new file", null),
-                    new MenuItem ("_Close", "",null),*/
-                    new MenuItem("Credit","", () => Credit()),
-                    new MenuItem ("quitter", "", () => { if (Quit ()) top.Running = false; })
-                }),/*
-                new MenuBarItem ("_Edit", new MenuItem [] {
-                    new MenuItem ("_Copy", "", null),
-                    new MenuItem ("C_ut", "", null),
-                    new MenuItem ("_Paste", "", null)
-                })*/
-            });
-            top.Add(menu);
 
             static bool Quit()
             {
@@ -73,7 +58,7 @@ namespace tower_defense
             };
 
              var menu = new MenuBar(new MenuBarItem[] {
-               new MenuBarItem ("quitter", new MenuItem [] {
+               new MenuBarItem ("Option/Quitter", new MenuItem [] {
                     new MenuItem ("Player Setting" , "" , () => playerSettingMethod(playerSetting)),
                     new MenuItem ("quitter", "", () => { if (Quit ()) top.Running = false; })
                 }),
