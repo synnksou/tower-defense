@@ -10,7 +10,7 @@ namespace tower_defense
         {
             Game game = new Game();
             //test passage données a la fenetre
-            MainWindow window = new MainWindow(game.getLevels().getEnnemies());
+            MainWindow window = new MainWindow(game);
         }
     }
 
