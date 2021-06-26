@@ -20,7 +20,7 @@ namespace tower_defense
             
             //!to delete
             Console.WriteLine("manche n°"+(nb));
-            ennemies.ForEach(e => Console.WriteLine(e.Nom));
+            ennemies.ForEach(e => Console.WriteLine(e.nom));
         }
 
         private int computeNbEnemies(int nb){
