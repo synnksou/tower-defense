@@ -5,31 +5,33 @@ namespace tower_defense
 {
     interface IEnnemi
     {
-        string Nom { get; set; }
-        int? Puissance{ get; set;}
-        int? Vie { get; set; }
+        string nom { get; set; }
+        int? puissance{ get; set;}
+        int? vie { get; set; }
+        IDictionary<int,int> Coord {get;set;}
         IEnnemi cloneEnnemi();
         void move();
         void degats();
+        void TakeDegats(int nb);
     }
 
     class Infanterie : IEnnemi
     {
-        public string Nom{get; set;}
-
-        public int? Puissance{ get; set;}
-
-        public int? Vie{ get; set;}
+        public string nom{get; set;}
+        public int? puissance{ get; set;}
+        public int? vie{ get; set;}
+        public IDictionary<int,int> Coord {get;set;} = new Dictionary<int,int>();
+        
         public Infanterie(string nom,int? puissance)
         {
-            this.Nom = nom;
-            this.Puissance = puissance != null ? puissance : 50 ;
-            this.Vie = 100;
+            this.nom = nom;
+            this.puissance = puissance != null ? puissance : 50 ;
+            this.vie = 100;
         }
 
         public IEnnemi cloneEnnemi()
         {
-            return new Infanterie(this.Nom, this.Puissance);
+            return new Infanterie(this.nom, this.puissance);
         }
 
         public void move()
@@ -40,21 +42,27 @@ namespace tower_defense
         public void degats(){
             Console.WriteLine("panpan");
         }
+
+        public void TakeDegats(int nb){
+            this.vie-= nb;
+        }
     }
 
     class Char : IEnnemi
     {
-        public string Nom{get; set;}
-        public int? Puissance{ get; set;}
-        public int? Vie{ get; set;}
+        public string nom{get; set;}
+        public int? puissance{ get; set;}
+        public int? vie{ get; set;}
+        public IDictionary<int,int> Coord {get;set;} = new Dictionary<int,int>();
+
         public Char(string nom,int? puissance){
-            this.Nom = nom;
-            this.Puissance = puissance != null ? puissance : 100 ;
-            this.Vie = 500;
+            this.nom = nom;
+            this.puissance = puissance != null ? puissance : 100 ;
+            this.vie = 500;
         }
 
         public IEnnemi cloneEnnemi(){
-            return new Infanterie(this.Nom,this.Puissance);
+            return new Infanterie(this.nom,this.puissance);
         }
 
         public void move(){
@@ -63,6 +71,10 @@ namespace tower_defense
 
         public void degats(){
             Console.WriteLine("panpan");
+        }
+
+        public void TakeDegats(int nb){
+            this.vie-= nb;
         }
 
     }
