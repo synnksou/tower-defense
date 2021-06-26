@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 namespace tower_defense
 {
-    interface IEnnemie
+    interface IEnnemi
     {
         string Nom { get; set; }
         int? Puissance{ get; set;}
         int? Vie { get; set; }
-        IEnnemie cloneEnnemie();
+        IEnnemi cloneEnnemi();
         void move();
         void degats();
     }
 
-    class Infanterie : IEnnemie
+    class Infanterie : IEnnemi
     {
         public string Nom{get; set;}
 
@@ -27,7 +27,7 @@ namespace tower_defense
             this.Vie = 100;
         }
 
-        public IEnnemie cloneEnnemie()
+        public IEnnemi cloneEnnemi()
         {
             return new Infanterie(this.Nom, this.Puissance);
         }
@@ -42,7 +42,7 @@ namespace tower_defense
         }
     }
 
-    class Char : IEnnemie
+    class Char : IEnnemi
     {
         public string Nom{get; set;}
         public int? Puissance{ get; set;}
@@ -53,7 +53,7 @@ namespace tower_defense
             this.Vie = 500;
         }
 
-        public IEnnemie cloneEnnemie(){
+        public IEnnemi cloneEnnemi(){
             return new Infanterie(this.Nom,this.Puissance);
         }
 

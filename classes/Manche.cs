@@ -6,7 +6,7 @@ namespace tower_defense
 {
     class Manche
     {
-        private List<IEnnemie> ennemies {get;set;} = new List<IEnnemie>();
+        private List<IEnnemi> ennemies {get;set;} = new List<IEnnemi>();
 
         public Manche(int nb,IDictionary<int,string> difficulte)
         {
@@ -14,7 +14,7 @@ namespace tower_defense
             Char char1 = new Char("Char",null);
             
 
-            for(int i=0;i<nb;i++){
+            for(int i=0;i<computeNbEnemies(nb);i++){
                 this.ennemies.Add(computeEnemies(new Random().Next(2)));    
             }
             
@@ -60,7 +60,7 @@ namespace tower_defense
             }
         }
 
-        private IEnnemie computeEnemies(int nbAlea){
+        private IEnnemi computeEnemies(int nbAlea){
             switch(nbAlea){
                 case 0:
                 return new Infanterie("soldat",null);
