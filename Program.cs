@@ -8,9 +8,8 @@ namespace tower_defense
     {
         static void Main(string[] args)
         {
-            Game game = new Game();
             //test passage données a la fenetre
-            MainWindow window = new MainWindow(game);
+            MainWindow window = new MainWindow();
         }
     }
 

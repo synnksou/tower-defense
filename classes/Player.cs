@@ -4,21 +4,20 @@ namespace tower_defense
     {
         public string pseudo { get; set; }
         public int score { get; set; }
+        public int money { get; set; }
+
         public Player()
         {
             this.pseudo = "No Pseudo";
+            this.money = 0;
             this.score = 0;
         }
 
-        public Player(string pseudo, int score)
+        public Player(string pseudo)
         {
             this.pseudo = pseudo;
-            this.score = score;
-        }
-        public Player(int score)
-        {
-            this.pseudo = "No Pseudo";
-            this.score = score;
+            this.score = 0;
+            this.money = 0;
         }
     }
 }
