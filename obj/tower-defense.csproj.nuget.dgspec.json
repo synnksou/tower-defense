@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\toinou\\tower-defense\\tower-defense.csproj": {}
+    "E:\\Bibliotheque\\Documents\\GIT\\tower-defense\\tower-defense.csproj": {}
   },
   "projects": {
-    "C:\\Users\\toinou\\tower-defense\\tower-defense.csproj": {
+    "E:\\Bibliotheque\\Documents\\GIT\\tower-defense\\tower-defense.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\toinou\\tower-defense\\tower-defense.csproj",
+        "projectUniqueName": "E:\\Bibliotheque\\Documents\\GIT\\tower-defense\\tower-defense.csproj",
         "projectName": "tower-defense",
-        "projectPath": "C:\\Users\\toinou\\tower-defense\\tower-defense.csproj",
-        "packagesPath": "C:\\Users\\toinou\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\toinou\\tower-defense\\obj\\",
+        "projectPath": "E:\\Bibliotheque\\Documents\\GIT\\tower-defense\\tower-defense.csproj",
+        "packagesPath": "C:\\Users\\dyklan\\.nuget\\packages\\",
+        "outputPath": "E:\\Bibliotheque\\Documents\\GIT\\tower-defense\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\toinou\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\dyklan\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0-windows"
