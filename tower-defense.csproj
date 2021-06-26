@@ -2,12 +2,13 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net5.0-windows</TargetFramework>
     <RootNamespace>tower_defense</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="ConsoleGUI" Version="1.4.0" />
+    <PackageReference Include="NAudio" Version="2.0.0" />
     <PackageReference Include="Terminal.Gui" Version="1.1.1" />
   </ItemGroup>
 
