@@ -13,7 +13,7 @@ namespace tower_defense
         public Dialog buttons {get; set; }
 
 
-        public MainWindow(Game game)
+        public MainWindow()
         {
             #region mainwindow
             Application.Init();
@@ -95,7 +95,7 @@ namespace tower_defense
 
             gameButton.Clicked += () =>
             {
-                Credit();
+                Game();
             };
 
             var settingsButton = new Button("Options", false)
@@ -139,6 +139,11 @@ namespace tower_defense
                 creditButton);
 
             return buttons;
+        }
+
+        public void Game()
+        {
+            Game game = new Game("test");
         }
 
         public void Credit()

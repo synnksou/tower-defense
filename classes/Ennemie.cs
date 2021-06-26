@@ -10,6 +10,7 @@ namespace tower_defense
         int? Vie { get; set; }
         IEnnemie cloneEnnemie();
         void move();
+        void degats();
     }
 
     class Infanterie : IEnnemie
@@ -36,7 +37,7 @@ namespace tower_defense
             Console.WriteLine("move");
         }
 
-        public void tirer(){
+        public void degats(){
             Console.WriteLine("panpan");
         }
     }
@@ -60,7 +61,7 @@ namespace tower_defense
             Console.WriteLine("move");
         }
 
-        public void tirer(){
+        public void degats(){
             Console.WriteLine("panpan");
         }
 
