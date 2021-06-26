@@ -1,16 +1,16 @@
-using System.Linq;
+using NAudio;
 using System;
-using System.Collections.Generic;
 using Terminal.Gui;
-using NStack;
-
+using NAudio.Wave;
+using NAudio.Wave.SampleProviders;
+using System.Threading;
 namespace tower_defense
 {
     class MainWindow
     {
         private Pos x = Pos.Center();
         private Pos y = Pos.Center();
-        public Dialog buttons {get; set; }
+        public Dialog buttons { get; set; }
 
 
         public MainWindow(Game game)
@@ -23,7 +23,7 @@ namespace tower_defense
             var win = new Window("tower-defense")
             {
                 X = 0,
-                Y = 1, 
+                Y = 1,
 
                 Width = Dim.Fill(),
                 Height = Dim.Fill()
@@ -35,10 +35,10 @@ namespace tower_defense
             #endregion
 
             #region menu
-            
+
             var welcome = new Label("Bienvenu") { X = x, Y = 0 };
             var name = new Label(player.pseudo) { X = x, Y = 1 };
-            var topMenu = new Label("F9 pour acceder au top menu") {X = x, Y = (y+y)};
+            var topMenu = new Label("F9 pour acceder au top menu") { X = x, Y = (y + y) };
             win.Add(
                 welcome,
                 name,
@@ -59,7 +59,7 @@ namespace tower_defense
                 }
             };
 
-             var menu = new MenuBar(new MenuBarItem[] {
+            var menu = new MenuBar(new MenuBarItem[] {
                new MenuBarItem ("Option/Quitter", new MenuItem [] {
                     new MenuItem ("Acceuil" , "" , () => Application.Run(top)),
                     new MenuItem ("Player Setting" , "" , () => playerSettingMethod(playerSetting)),
@@ -68,8 +68,18 @@ namespace tower_defense
             });
             top.Add(menu);
             #endregion
-            
+
             //playerSettingMethod(playerSetting);
+            var url = @"./sounds/doom-eternal-ost.wav";
+            var audioFile = new AudioFileReader(url);
+            var outputDevice = new WaveOutEvent();
+            var volume = new VolumeSampleProvider(audioFile.ToSampleProvider());
+            volume.Volume = 0.2f;
+            
+
+            outputDevice.Init(volume);
+            outputDevice.Play();
+
 
             Application.Run();
         }
@@ -161,11 +171,11 @@ namespace tower_defense
             var creditJulien = new Label(stringCreditJulien) { X = 3, Y = 7 };
 
             #region buttons
-        
-            var exitButton = new Button("Exit",false)
+
+            var exitButton = new Button("Exit", false)
             {
                 X = Pos.Bottom(creditJulien),
-                Y = Pos.Bottom(creditJulien)+5
+                Y = Pos.Bottom(creditJulien) + 5
             };
             #endregion
 
@@ -190,7 +200,7 @@ namespace tower_defense
 
         public void HelpView()
         {
-            
+
             var top = Application.Top;
             #region layouts
             var creditWindows = new Window("Page d'aide")
@@ -201,18 +211,20 @@ namespace tower_defense
                 Height = Dim.Fill()
             };
             var title = new Label(1, 1, "Help example");
-            var help = new Label("L'application Tower-Defense est jouable au clavier") { 
-                X = Pos.Bottom(title)-1,
-                Y = Pos.Bottom(title)+1 };
+            var help = new Label("L'application Tower-Defense est jouable au clavier")
+            {
+                X = Pos.Bottom(title) - 1,
+                Y = Pos.Bottom(title) + 1
+            };
 
             #endregion
 
             #region buttons
-        
-            var exitButton = new Button("Exit",false)
+
+            var exitButton = new Button("Exit", false)
             {
                 X = Pos.Bottom(help),
-                Y = Pos.Bottom(help)+5
+                Y = Pos.Bottom(help) + 5
             };
             #endregion
 
@@ -221,11 +233,11 @@ namespace tower_defense
 
             exitButton.Clicked += () =>
             {
-                exitButton = new Button("test",false)
-            {
-                X = Pos.Bottom(help),
-                Y = Pos.Bottom(help)+5
-            };
+                exitButton = new Button("test", false)
+                {
+                    X = Pos.Bottom(help),
+                    Y = Pos.Bottom(help) + 5
+                };
             };
 
             #endregion
