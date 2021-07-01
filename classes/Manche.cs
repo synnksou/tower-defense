@@ -6,7 +6,7 @@ namespace tower_defense
 {
     class Manche
     {
-        private List<IEnnemi> ennemies {get;set;} = new List<IEnnemi>();
+        public List<IEnnemi> ennemies {get;set;} = new List<IEnnemi>();
 
         public Manche(int nb,IDictionary<int,string> difficulte)
         {
@@ -20,7 +20,7 @@ namespace tower_defense
             
             //!to delete
             Console.WriteLine("manche n°"+(nb));
-            ennemies.ForEach(e => Console.WriteLine(e.nom));
+            ennemies.ForEach(e => Console.WriteLine(e.Nom));
         }
 
         private int computeNbEnemies(int nb){

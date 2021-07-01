@@ -6,16 +6,16 @@ namespace tower_defense
     interface ITower
     {
         string Nom { get; set; }
-        int? Puissance{ get; set;}
+        int Puissance{ get; set;}
         ITower cloneTower();
-        void degats();
+        int degats();
     }
 
     class BaseTower : ITower
     {
         public string Nom{get; set;}
 
-        public int? Puissance{ get; set;}
+        public int Puissance{ get; set;}
 
         public BaseTower(string nom)
         {
@@ -28,9 +28,32 @@ namespace tower_defense
             return new BaseTower(this.Nom);
         }
 
-        public void degats(){
-            Console.WriteLine("panpan");
+        public int degats(){
+            return this.Puissance;
         }
     }
+
+    class AdvancedTower : ITower
+    {
+        public string Nom{get; set;}
+
+        public int Puissance{ get; set;}
+
+        public AdvancedTower(string nom)
+        {
+            this.Nom = nom;
+            this.Puissance = 150 ;
+        }
+
+        public ITower cloneTower()
+        {
+            return new BaseTower(this.Nom);
+        }
+
+        public int degats(){
+            return this.Puissance;
+        }
+    }
+
 
 }

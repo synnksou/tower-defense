@@ -5,76 +5,118 @@ namespace tower_defense
 {
     interface IEnnemi
     {
-        string nom { get; set; }
-        int? puissance{ get; set;}
-        int? vie { get; set; }
-        IDictionary<int,int> Coord {get;set;}
+        (int, int,int) coord {get;set;}
+        string Nom { get; set; }
+        int Puissance{ get; set;}
+        int? Vie { get; set; }
         IEnnemi cloneEnnemi();
-        void move();
-        void degats();
+        int Degats();
         void TakeDegats(int nb);
+        void Move(IMap map);
     }
 
     class Infanterie : IEnnemi
     {
-        public string nom{get; set;}
-        public int? puissance{ get; set;}
-        public int? vie{ get; set;}
-        public IDictionary<int,int> Coord {get;set;} = new Dictionary<int,int>();
+        public (int, int,int) coord {get;set;}
+        public string Nom{get; set;}
+        public int Puissance{ get; set;}
+        public int? Vie{ get; set;}
         
         public Infanterie(string nom,int? puissance)
         {
-            this.nom = nom;
-            this.puissance = puissance != null ? puissance : 50 ;
-            this.vie = 100;
+            this.Nom = nom;
+            this.Puissance = 50 ;
+            this.Vie = 100;
+            this.coord = (0,0,1);
         }
 
         public IEnnemi cloneEnnemi()
         {
-            return new Infanterie(this.nom, this.puissance);
+            return new Infanterie(this.Nom, this.Puissance);
         }
 
-        public void move()
+        public void Move(IMap map)
         {
-            Console.WriteLine("move");
+            int myX = this.coord.Item1;
+            int myY = this.coord.Item2;
+            bool Next = true;
+            while(Next){
+                if(map.MapGround[myX+1,myY,0] == 2){
+                    Next= !Next;
+                    this.coord = (myY+1,myY,2);
+                }
+                if(map.MapGround[myX,myY-1,2] == 2){
+                    Next= !Next;
+                    this.coord = (myY+1,myY+1,2);
+                }
+                if(map.MapGround[myX+1,myY,0] == 3){
+                    Next= !Next;
+                    this.coord = (myY+1,myY,3);
+                }
+                if(map.MapGround[myX,myY-1,2] == 3){
+                    Next= !Next;
+                    this.coord = (myY+1,myY+1,3);
+                }
+            }
         }
 
-        public void degats(){
-            Console.WriteLine("panpan");
+        public int Degats(){
+            return this.Puissance;
         }
 
         public void TakeDegats(int nb){
-            this.vie-= nb;
+            this.Vie-= nb;
         }
     }
 
     class Char : IEnnemi
     {
-        public string nom{get; set;}
-        public int? puissance{ get; set;}
-        public int? vie{ get; set;}
-        public IDictionary<int,int> Coord {get;set;} = new Dictionary<int,int>();
+        public (int, int,int) coord {get;set;}
+        public string Nom{get; set;}
+        public int Puissance{ get; set;}
+        public int? Vie{ get; set;}
 
         public Char(string nom,int? puissance){
-            this.nom = nom;
-            this.puissance = puissance != null ? puissance : 100 ;
-            this.vie = 500;
+            this.Nom = nom;
+            this.Puissance = 100 ;
+            this.Vie = 500;
         }
 
         public IEnnemi cloneEnnemi(){
-            return new Infanterie(this.nom,this.puissance);
+            return new Infanterie(this.Nom,this.Puissance);
         }
 
-        public void move(){
-            Console.WriteLine("move");
+        public void Move(IMap map )
+        {
+            int myX = this.coord.Item1;
+            int myY = this.coord.Item2;
+            bool Next = true;
+            while(Next){
+                if(map.MapGround[myX+1,myY,0] == 2){
+                    Next= !Next;
+                    this.coord = (myY+1,myY,2);
+                }
+                if(map.MapGround[myX,myY-1,2] == 2){
+                    Next= !Next;
+                    this.coord = (myY+1,myY+1,2);
+                }
+                if(map.MapGround[myX+1,myY,0] == 3){
+                    Next= !Next;
+                    this.coord = (myY+1,myY,3);
+                }
+                if(map.MapGround[myX,myY-1,2] == 3){
+                    Next= !Next;
+                    this.coord = (myY+1,myY+1,3);
+                }
+            }
         }
 
-        public void degats(){
-            Console.WriteLine("panpan");
+        public int Degats(){
+            return this.Puissance;
         }
 
         public void TakeDegats(int nb){
-            this.vie-= nb;
+            this.Vie-= nb;
         }
 
     }

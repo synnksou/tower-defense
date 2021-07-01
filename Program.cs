@@ -8,7 +8,6 @@ namespace tower_defense
     {
         static void Main(string[] args)
         {
-            //test passage données a la fenetre
             MainWindow window = new MainWindow();
         }
     }

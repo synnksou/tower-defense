@@ -28,6 +28,7 @@ namespace tower_defense
 
             ComputeNbManches(difficulte);
 
+            //! to delete
             Console.WriteLine("nb manche :"+this.nbManches);
 
 
@@ -39,6 +40,8 @@ namespace tower_defense
 
             //!to delete
             Console.WriteLine("game init");
+
+            //Launch();
         }
 
         private void ComputeNbManches(int? diff = 2){
@@ -59,6 +62,20 @@ namespace tower_defense
                 default: this.nbManches = 10;
                 return;
             }
+        }
+
+        private void Launch(){
+            int i=0;
+            while(this.manches.Count!=0 || this.home.vie == 0){
+                while(this.manches[i].ennemies.Count!=0 || this.home.vie == 0){
+                    
+                }
+                i++;
+            }
+        }
+
+        private void Enemiesove(IEnnemi E){
+            E.Move(this.mapOne);
         }
     }
 }
