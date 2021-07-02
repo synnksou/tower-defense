@@ -247,11 +247,13 @@ namespace tower_defense
                 {
                     outputDevice.Stop();
                     changeStringButton = "Play";
+                    soundIsOff = true;
                 }
                 else
                 {
                     outputDevice.Play();
                     changeStringButton = "Stop";
+                    soundIsOff = false;
                 }
             };
 
