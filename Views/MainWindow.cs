@@ -205,53 +205,50 @@ namespace tower_defense
 
         public void HelpView()
         {
-
+            
             var top = Application.Top;
             #region layouts
-            var creditWindows = new Window("Page d'aide")
+            var helpWindows = new Window("Page d'aide")
             {
                 X = 0,
                 Y = 1,
                 Width = Dim.Fill(),
                 Height = Dim.Fill()
             };
-            var title = new Label(1, 1, "Help example");
-            var help = new Label("L'application Tower-Defense est jouable au clavier")
-            {
-                X = Pos.Bottom(title) - 1,
-                Y = Pos.Bottom(title) + 1
-            };
+            helpWindows.ColorScheme = Colors.Dialog;
+
+            var title = new Label(1, 1, "Le Tower defense");
+
+            var help = new Label("Le Tower defense est un type de jeux qui consiste à defendre ça zone !") { 
+                X = Pos.Bottom(title)-1,
+                Y = Pos.Bottom(title)+1 };
+
+            var detail = new Label("Les ennemies arriveront successivement et il faudra les tuer avant qu'ils vous atteignent :) \r\nÉquiper votre base, pour éviter aux ennemis de si introduire.\r\nLes différents items possèdes différentes cadencent de tirs ou peux lancer plusieurs missiles d'un cout, mais coute plus chére.\r\nPour ce faire, vous les sélectionnerez à laide des flèches clavier. Puis placez votre équipement sur l'un des emplacements libre, \r\nqui n'est pas sur un obstacle mais qui est suffisement proche du chemin des ennemies."){
+                X = Pos.Bottom(help)-3,
+                Y = Pos.Bottom(help)+1 };
 
             #endregion
 
             #region buttons
 
-            var exitButton = new Button("Exit", false)
+            var exitButton = new Button("F9 pour accéder au top menu",false)
             {
-                X = Pos.Bottom(help),
-                Y = Pos.Bottom(help) + 5
+                X = Pos.Bottom(detail),
+                Y = Pos.Bottom(detail)+5
             };
-            #endregion
 
-            #region bind-button-events*
-
-
-            exitButton.Clicked += () =>
-            {
-                exitButton = new Button("test", false)
+            exitButton.Clicked += ()=>
                 {
-                    X = Pos.Bottom(help),
-                    Y = Pos.Bottom(help) + 5
+                    MenuView(top);
                 };
-            };
-
             #endregion
 
 
-            creditWindows.Add(title);
-            creditWindows.Add(help);
-            creditWindows.Add(exitButton);
-            top.Add(creditWindows);
+            helpWindows.Add(title);
+            helpWindows.Add(help);
+            helpWindows.Add(detail);
+            helpWindows.Add(exitButton);
+            top.Add(helpWindows);
             Application.Run(top);
         }
 
