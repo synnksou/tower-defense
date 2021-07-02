@@ -3,7 +3,6 @@ using System;
 using Terminal.Gui;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
-using System.Threading;
 namespace tower_defense
 {
     class MainWindow
@@ -34,6 +33,7 @@ namespace tower_defense
                 Height = Dim.Fill()
 
             };
+
             win.ColorScheme = Colors.Dialog;
             top.Add(win);
 
@@ -43,12 +43,12 @@ namespace tower_defense
 
             var welcome = new Label("Bienvenu") { X = x, Y = 0 };
             var name = new Label(player.pseudo) { X = x, Y = 1 };
-            var topMenu = new Label("F9 pour acceder au top menu") { X = x, Y = (y + y) };
+            var topMenuLabel = new Label("F9 pour acceder au top menu") { X = x, Y = (y + y) };
             win.Add(
                 welcome,
                 name,
-                MenuView(top),
-                topMenu
+                MenuView(),
+                topMenuLabel
             );
 
             var playerSetting = new PlayerSetting(player, top)
@@ -95,7 +95,7 @@ namespace tower_defense
             Application.Run(playerSetting);
         }
 
-        public Dialog MenuView(View top)
+        public Dialog MenuView()
         {
             var gameButton = new Button("Jeu", false)
             {
@@ -105,7 +105,6 @@ namespace tower_defense
 
             gameButton.Clicked += () =>
             {
-
                 Game();
             };
 
@@ -215,8 +214,7 @@ namespace tower_defense
                 Y = 1,
                 Width = Dim.Fill(),
                 Height = Dim.Fill()
-            };
-
+            };            
             var title = new String("Settings Game");
             var sound = new String("Play Music / Stop Music");
             var titleLabel = new Label(title) { X = 3, Y = 5 };
@@ -226,20 +224,20 @@ namespace tower_defense
             var soundIsOff = false;
 
             var changeStringButton = new String("Stop");
-            var buttonSound = new Button(changeStringButton, false)
+            var buttonSound = new Button(changeStringButton)
             {
                 X = 50,
                 Y = 6
             };
 
-            var exitButton = new Button("Exit", false)
+            var exitButton = new Button("Exit")
             {
                 X = Pos.Bottom(soundLabel),
                 Y = Pos.Bottom(soundLabel) + 5
             };
             #endregion
 
-            #region bind-button-events*
+            #region bind-button-events
 
             buttonSound.Clicked += () =>
             {
@@ -265,8 +263,10 @@ namespace tower_defense
             #endregion
 
             optionsWindows.Add(titleLabel, soundLabel, buttonSound, exitButton);
+            top.RemoveAll();
             top.Add(optionsWindows);
-            Application.Run(top);
+            Application.Run();
+
         }
 
         public void HelpView()
