@@ -297,16 +297,16 @@ namespace tower_defense
 
             #region buttons
 
-            var exitButton = new Button("F9 pour accéder au top menu",false)
+            var exitButton = new Button("exit",false)
             {
                 X = Pos.Bottom(detail),
                 Y = Pos.Bottom(detail)+5
             };
 
-            exitButton.Clicked += ()=>
-                {
-                    MenuView(top);
-                };
+            exitButton.Clicked += () =>
+            {
+                Application.Run();
+            };
             #endregion
 
 
