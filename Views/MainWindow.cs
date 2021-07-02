@@ -12,6 +12,11 @@ namespace tower_defense
         private Pos y = Pos.Center();
         public Dialog buttons { get; set; }
 
+        //Ref Sounds
+        static public String url = @"./sounds/doom-eternal-ost.wav";
+        static public AudioFileReader audioFile = new AudioFileReader(url);
+        static public WaveOutEvent outputDevice = new WaveOutEvent();
+        static public VolumeSampleProvider volume = new VolumeSampleProvider(audioFile.ToSampleProvider());
 
         public MainWindow()
         {
@@ -61,7 +66,7 @@ namespace tower_defense
 
             var menu = new MenuBar(new MenuBarItem[] {
                new MenuBarItem ("Option/Quitter", new MenuItem [] {
-                    new MenuItem ("Acceuil" , "" , () => Application.Run(top)),
+                    new MenuItem ("Accueil" , "" , () => Application.Run(top)),
                     new MenuItem ("Player Setting" , "" , () => playerSettingMethod(playerSetting)),
                     new MenuItem ("Quitter", "", () => { if (Quit ()) top.Running = false; })
                 }),
@@ -70,13 +75,8 @@ namespace tower_defense
             #endregion
 
             //playerSettingMethod(playerSetting);
-            var url = @"./sounds/doom-eternal-ost.wav";
-            var audioFile = new AudioFileReader(url);
-            var outputDevice = new WaveOutEvent();
-            var volume = new VolumeSampleProvider(audioFile.ToSampleProvider());
-            volume.Volume = 0.2f;
-            
 
+            volume.Volume = 0.2f;
             outputDevice.Init(volume);
             outputDevice.Play();
 
@@ -105,6 +105,7 @@ namespace tower_defense
 
             gameButton.Clicked += () =>
             {
+
                 Game();
             };
 
@@ -116,7 +117,7 @@ namespace tower_defense
 
             settingsButton.Clicked += () =>
             {
-                Credit();
+                Settings(outputDevice);
             };
 
             var helpButton = new Button("Aide", false)
@@ -141,7 +142,8 @@ namespace tower_defense
                 Credit();
             };
 
-            buttons = new Dialog();
+            buttons = new Dialog("Menu");
+
             buttons.Add(
                 gameButton,
                 settingsButton,
@@ -200,6 +202,68 @@ namespace tower_defense
             creditWindows.Add(creditJulien);
             creditWindows.Add(exitButton);
             top.Add(creditWindows);
+            Application.Run(top);
+        }
+
+        public void Settings(WaveOutEvent outputDevice)
+        {
+            var top = Application.Top;
+            var view = new View("MenuView");
+            var optionsWindows = new Window("Options")
+            {
+                X = 0,
+                Y = 1,
+                Width = Dim.Fill(),
+                Height = Dim.Fill()
+            };
+
+            var title = new String("Settings Game");
+            var sound = new String("Play Music / Stop Music");
+            var titleLabel = new Label(title) { X = 3, Y = 5 };
+            var soundLabel = new Label(sound) { X = 3, Y = 6 };
+
+            #region buttons
+            var soundIsOff = false;
+
+            var changeStringButton = new String("Stop");
+            var buttonSound = new Button(changeStringButton, false)
+            {
+                X = 50,
+                Y = 6
+            };
+
+            var exitButton = new Button("Exit", false)
+            {
+                X = Pos.Bottom(soundLabel),
+                Y = Pos.Bottom(soundLabel) + 5
+            };
+            #endregion
+
+            #region bind-button-events*
+
+            buttonSound.Clicked += () =>
+            {
+                if (!soundIsOff)
+                {
+                    outputDevice.Stop();
+                    changeStringButton = "Play";
+                }
+                else
+                {
+                    outputDevice.Play();
+                    changeStringButton = "Stop";
+                }
+            };
+
+            exitButton.Clicked += () =>
+            {
+                Application.Run();
+            };
+
+            #endregion
+
+            optionsWindows.Add(titleLabel, soundLabel, buttonSound, exitButton);
+            top.Add(optionsWindows);
             Application.Run(top);
         }
 
