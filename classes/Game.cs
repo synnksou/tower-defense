@@ -15,9 +15,12 @@ namespace tower_defense
 
         private int nbManches {get;set;}
 
-        public Game(string name)
+        public Game(Player player)
         {
-            this.player = new Player(name);
+            this.player = player;
+            
+            Console.WriteLine(player.pseudo);
+
             this.settings = new Settings();
             this.home = new Base();
             this.mapOne = new MapOne();

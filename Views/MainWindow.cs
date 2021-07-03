@@ -3,7 +3,6 @@ using System;
 using Terminal.Gui;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
-using System.Threading;
 namespace tower_defense
 {
     class MainWindow
@@ -34,6 +33,7 @@ namespace tower_defense
                 Height = Dim.Fill()
 
             };
+
             win.ColorScheme = Colors.Dialog;
             top.Add(win);
 
@@ -42,32 +42,22 @@ namespace tower_defense
             #region menu
 
             var welcome = new Label("Bienvenu") { X = x, Y = 0 };
-            var name = new Label(player.pseudo) { X = x, Y = 1 };
-            var topMenu = new Label("F9 pour acceder au top menu") { X = x, Y = (y + y) };
+            var topMenuLabel = new Label("F9 pour acceder au top menu") { X = x, Y = (y + y) };
             win.Add(
                 welcome,
-                name,
-                MenuView(top),
-                topMenu
+                MenuView(win,player,top),
+                topMenuLabel
             );
 
-            var playerSetting = new PlayerSetting(player, top)
-            {
-                OnExit = Application.RequestStop,
-                OnSave = (player) =>
-                {
-                    Application.MainLoop.Invoke(() =>
-                    {
-                        name.Text = player.pseudo;
-                    });
-                    Application.Run();
-                }
-            };
+            
 
             var menu = new MenuBar(new MenuBarItem[] {
                new MenuBarItem ("Option/Quitter", new MenuItem [] {
-                    new MenuItem ("Accueil" , "" , () => Application.Run(top)),
-                    new MenuItem ("Player Setting" , "" , () => playerSettingMethod(playerSetting)),
+                    new MenuItem ("Accueil" , "" , () => {
+                    top.Remove(top.Focused);
+                    top.Add(win);
+                    Application.Run();
+                    }),
                     new MenuItem ("Quitter", "", () => { if (Quit ()) top.Running = false; })
                 }),
             });
@@ -90,13 +80,9 @@ namespace tower_defense
             return n == 0;
         }
 
-        static void playerSettingMethod(PlayerSetting playerSetting)
+        public Dialog MenuView(Window previousWin,Player player,Toplevel top)
         {
-            Application.Run(playerSetting);
-        }
-
-        public Dialog MenuView(View top)
-        {
+            
             var gameButton = new Button("Jeu", false)
             {
                 X = x,
@@ -105,8 +91,7 @@ namespace tower_defense
 
             gameButton.Clicked += () =>
             {
-
-                Game();
+                ChoosePseudoToLaunchGame(player,previousWin);
             };
 
             var settingsButton = new Button("Options", false)
@@ -117,7 +102,7 @@ namespace tower_defense
 
             settingsButton.Clicked += () =>
             {
-                Settings(outputDevice);
+                Settings(outputDevice,previousWin);
             };
 
             var helpButton = new Button("Aide", false)
@@ -128,7 +113,7 @@ namespace tower_defense
 
             helpButton.Clicked += () =>
             {
-                HelpView();
+                HelpView(previousWin);
             };
 
             var creditButton = new Button("Credit", false)
@@ -139,7 +124,7 @@ namespace tower_defense
 
             creditButton.Clicked += () =>
             {
-                Credit();
+                Credit(previousWin);
             };
 
             buttons = new Dialog("Menu");
@@ -153,12 +138,83 @@ namespace tower_defense
             return buttons;
         }
 
-        public void Game()
+        
+        static void ChoosePseudoToLaunchGame(Player player,Window previousWin)
         {
-            Game game = new Game("test");
+            var top = Application.Top;
+            #region layouts
+            var PseudoWindow = new Window("Choisit ton pseudo")
+            {
+                X = 0,
+                Y = 1,
+                Width = Dim.Fill(),
+                Height = Dim.Fill()
+            };
+
+            var nameLabel = new Label(3, 5, "Pseudo");
+
+            var nameText = new TextField("")
+            {
+                X = Pos.Left(nameLabel),
+                Y = Pos.Top(nameLabel) + 1,
+                Width = Dim.Fill()
+            };
+            #endregion
+
+            #region buttons
+            var saveButton = new Button("Sauver", false)
+            {
+                X = Pos.Left(nameText) + 1,
+                Y = Pos.Top(nameText) + 1
+            };
+
+            var exitButton = new Button("Exit")
+            {
+                X = Pos.Right(saveButton) + 5,
+                Y = Pos.Top(saveButton)
+            };
+            #endregion
+
+            #region bind-button-events*
+
+            saveButton.Clicked += () =>
+            {
+                if (nameText.Text.ToString().TrimStart().Length == 0)
+                {
+                    MessageBox.ErrorQuery(25, 8, "Erreur", "Pseudo ne peut etre vide", "Ok");
+                    return;
+                }
+                player.pseudo = nameText.Text.ToString();
+                Console.WriteLine(player.pseudo);
+                Game(player);
+            };
+
+            exitButton.Clicked += () =>
+            {
+                top.Remove(PseudoWindow);
+                top.Add(previousWin);
+                Application.Run();
+            };
+
+            #endregion
+
+
+            top.Add(nameLabel);
+            top.Add(nameText);
+            top.Add(saveButton);
+            top.Add(exitButton);
+
+            top.Remove(previousWin);
+            top.Add(PseudoWindow);
+            Application.Run();
         }
 
-        public void Credit()
+        public static void Game(Player player)
+        {
+            Game game = new Game(player);
+        }
+
+        public void Credit(Window previousWin)
         {
             var top = Application.Top;
             var creditWindows = new Window("Credit")
@@ -191,6 +247,8 @@ namespace tower_defense
 
             exitButton.Clicked += () =>
             {
+                top.Remove(creditWindows);
+                top.Add(previousWin);
                 Application.Run();
             };
 
@@ -201,11 +259,13 @@ namespace tower_defense
             creditWindows.Add(creditDyklan);
             creditWindows.Add(creditJulien);
             creditWindows.Add(exitButton);
+
+            top.Remove(previousWin);
             top.Add(creditWindows);
-            Application.Run(top);
+            Application.Run();
         }
 
-        public void Settings(WaveOutEvent outputDevice)
+        public void Settings(WaveOutEvent outputDevice,Window previousWin)
         {
             var top = Application.Top;
             var view = new View("MenuView");
@@ -215,8 +275,7 @@ namespace tower_defense
                 Y = 1,
                 Width = Dim.Fill(),
                 Height = Dim.Fill()
-            };
-
+            };            
             var title = new String("Settings Game");
             var sound = new String("Play Music / Stop Music");
             var titleLabel = new Label(title) { X = 3, Y = 5 };
@@ -226,20 +285,20 @@ namespace tower_defense
             var soundIsOff = false;
 
             var changeStringButton = new String("Stop");
-            var buttonSound = new Button(changeStringButton, false)
+            var buttonSound = new Button(changeStringButton)
             {
                 X = 50,
                 Y = 6
             };
 
-            var exitButton = new Button("Exit", false)
+            var exitButton = new Button("Exit")
             {
                 X = Pos.Bottom(soundLabel),
                 Y = Pos.Bottom(soundLabel) + 5
             };
             #endregion
 
-            #region bind-button-events*
+            #region bind-button-events
 
             buttonSound.Clicked += () =>
             {
@@ -259,19 +318,22 @@ namespace tower_defense
 
             exitButton.Clicked += () =>
             {
+                top.Remove(optionsWindows);
+                top.Add(previousWin);
                 Application.Run();
             };
 
             #endregion
 
             optionsWindows.Add(titleLabel, soundLabel, buttonSound, exitButton);
+            top.Remove(previousWin);
             top.Add(optionsWindows);
-            Application.Run(top);
+            Application.Run();
+
         }
 
-        public void HelpView()
+        public void HelpView(Window previousWin)
         {
-            
             var top = Application.Top;
             #region layouts
             var helpWindows = new Window("Page d'aide")
@@ -305,6 +367,8 @@ namespace tower_defense
 
             exitButton.Clicked += () =>
             {
+                top.Remove(helpWindows);
+                top.Add(previousWin);
                 Application.Run();
             };
             #endregion
@@ -314,6 +378,8 @@ namespace tower_defense
             helpWindows.Add(help);
             helpWindows.Add(detail);
             helpWindows.Add(exitButton);
+
+            top.Remove(previousWin);
             top.Add(helpWindows);
             Application.Run(top);
         }
