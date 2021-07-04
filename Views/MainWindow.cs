@@ -164,7 +164,7 @@ namespace tower_defense
             #endregion
 
             #region buttons
-            var saveButton = new Button("Sauver", false)
+            var saveButton = new Button("Continuer et jouer", false)
             {
                 X = Pos.Left(nameText) + 1,
                 Y = Pos.Top(nameText) + 1
@@ -315,13 +315,13 @@ namespace tower_defense
                 if (!soundIsOff)
                 {
                     outputDevice.Stop();
-                    changeStringButton = "Play";
+                    buttonSound.Text = "Play";
                     soundIsOff = true;
                 }
                 else
                 {
                     outputDevice.Play();
-                    changeStringButton = "Stop";
+                    buttonSound.Text = "Stop";
                     soundIsOff = false;
                 }
             };
