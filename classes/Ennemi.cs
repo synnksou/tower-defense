@@ -41,19 +41,19 @@ namespace tower_defense
             int myY = this.coord.Item2;
             bool Next = true;
             while(Next){
-                if(map.MapGround[myX+1,myY,0] == 2){
+                if(map.MapGround[myX+1,myY] == 2){
                     Next= !Next;
                     this.coord = (myY+1,myY,2);
                 }
-                if(map.MapGround[myX,myY-1,2] == 2){
+                if(map.MapGround[myX,myY-1] == 2){
                     Next= !Next;
                     this.coord = (myY+1,myY+1,2);
                 }
-                if(map.MapGround[myX+1,myY,0] == 3){
+                if(map.MapGround[myX+1,myY] == 3){
                     Next= !Next;
                     this.coord = (myY+1,myY,3);
                 }
-                if(map.MapGround[myX,myY-1,2] == 3){
+                if(map.MapGround[myX,myY-1] == 3){
                     Next= !Next;
                     this.coord = (myY+1,myY+1,3);
                 }
@@ -92,19 +92,19 @@ namespace tower_defense
             int myY = this.coord.Item2;
             bool Next = true;
             while(Next){
-                if(map.MapGround[myX+1,myY,0] == 2){
+                if(map.MapGround[myX+1,myY] == 2){
                     Next= !Next;
                     this.coord = (myY+1,myY,2);
                 }
-                if(map.MapGround[myX,myY-1,2] == 2){
+                if(map.MapGround[myX,myY-1] == 2){
                     Next= !Next;
                     this.coord = (myY+1,myY+1,2);
                 }
-                if(map.MapGround[myX+1,myY,0] == 3){
+                if(map.MapGround[myX+1,myY] == 3){
                     Next= !Next;
                     this.coord = (myY+1,myY,3);
                 }
-                if(map.MapGround[myX,myY-1,2] == 3){
+                if(map.MapGround[myX,myY-1] == 3){
                     Next= !Next;
                     this.coord = (myY+1,myY+1,3);
                 }

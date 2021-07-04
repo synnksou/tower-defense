@@ -188,7 +188,7 @@ namespace tower_defense
                 }
                 player.pseudo = nameText.Text.ToString();
                 Console.WriteLine(player.pseudo);
-                Game(player);
+                Game(player, previousWin);
             };
 
             exitButton.Clicked += () =>
@@ -211,9 +211,9 @@ namespace tower_defense
             Application.Run();
         }
 
-        public static void Game(Player player)
+        public static void Game(Player player, Window window)
         {
-            Game game = new Game(player);
+            Game game = new Game(player, window);
         }
 
         public void Credit(Window previousWin)
@@ -368,7 +368,10 @@ namespace tower_defense
             var comandes = new Label("Au début déburt de partie vous aurez 100points , de quoi achter une tour \r\nA chaque enemie tué vous gagner un nombre de point en fonctions de sa puissance \r\nUtilisez les fleches pour choisir la Tour a acheter puis [Entrer] pour valider l'achat \r\nUne fois la tour achetée placé la sur un terrain contructible \r\nLa tour tire automatiquement et sans aucune intervention de choix de cible \r\nVeillez sur notre base camarade !"){
                 X = Pos.Bottom(detail)-9,
                 Y = Pos.Bottom(detail)+1};
-
+            
+            var place = new Label(" # =  Depart Ennemi  \r\n B = Finalité a protégés  \r\n H = Chemin Ennemi \r\n 0 = Emplacement tours sur la carte "){
+                X = Pos.Bottom(comandes)-15,
+                Y = Pos.Bottom(comandes)+1};
             #endregion
 
             #region buttons
@@ -392,7 +395,7 @@ namespace tower_defense
             helpWindows.Add(help);
             helpWindows.Add(detail);
             helpWindows.Add(comandes);
-            helpWindows.Add(exitButton);
+            helpWindows.Add(exitButton, place);
 
             top.Remove(previousWin);
             top.Add(helpWindows);
