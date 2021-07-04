@@ -105,7 +105,7 @@ namespace tower_defense
                 Settings(outputDevice,previousWin);
             };
 
-            var helpButton = new Button("Aide", false)
+            var helpButton = new Button("Aide Jeu", false)
             {
                 X = x,
                 Y = Pos.Bottom(settingsButton) + 1
@@ -116,7 +116,7 @@ namespace tower_defense
                 HelpView(previousWin);
             };
 
-            var creditButton = new Button("Credit", false)
+            var creditButton = new Button("Credits", false)
             {
                 X = x,
                 Y = Pos.Bottom(helpButton) + 1
@@ -365,14 +365,18 @@ namespace tower_defense
                 X = Pos.Bottom(help)-3,
                 Y = Pos.Bottom(help)+1 };
 
+            var comandes = new Label("Au début déburt de partie vous aurez 100points , de quoi achter une tour \r\nA chaque enemie tué vous gagner un nombre de point en fonctions de sa puissance \r\nUtilisez les fleches pour choisir la Tour a acheter puis [Entrer] pour valider l'achat \r\nUne fois la tour achetée placé la sur un terrain contructible \r\nLa tour tire automatiquement et sans aucune intervention de choix de cible \r\nVeillez sur notre base camarade !"){
+                X = Pos.Bottom(detail)-9,
+                Y = Pos.Bottom(detail)+1};
+
             #endregion
 
             #region buttons
 
             var exitButton = new Button("exit",false)
             {
-                X = Pos.Bottom(detail),
-                Y = Pos.Bottom(detail)+5
+                X = Pos.Bottom(comandes),
+                Y = Pos.Bottom(comandes)+5
             };
 
             exitButton.Clicked += () =>
@@ -387,6 +391,7 @@ namespace tower_defense
             helpWindows.Add(title);
             helpWindows.Add(help);
             helpWindows.Add(detail);
+            helpWindows.Add(comandes);
             helpWindows.Add(exitButton);
 
             top.Remove(previousWin);
