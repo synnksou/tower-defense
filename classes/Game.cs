@@ -1,6 +1,8 @@
 using System.Linq;
 using System;
 using System.Collections.Generic;
+using Microsoft.VisualBasic;
+using Terminal.Gui;
 
 namespace tower_defense
 {
@@ -15,15 +17,15 @@ namespace tower_defense
 
         private int nbManches {get;set;}
 
-        public Game(Player player)
+        public Game(Player player, Window prevWindows)
         {
             this.player = player;
-            
-            Console.WriteLine(player.pseudo);
+            var top = Application.Top;
+            var gameWindows = new Window();
 
             this.settings = new Settings();
             this.home = new Base();
-            this.mapOne = new MapOne();
+            this.mapOne = new MapOne(gameWindows);
             
             settings.difficulteChoose.Add(settings.difficulteList.Single(diff => diff.Key == 1));
 
@@ -31,8 +33,7 @@ namespace tower_defense
 
             ComputeNbManches(difficulte);
 
-            //! to delete
-            Console.WriteLine("nb manche :"+this.nbManches);
+          
 
 
             for(int i=0;i<nbManches;i++){
@@ -41,9 +42,41 @@ namespace tower_defense
 
             this.manches.ToString();
 
-            //!to delete
-            Console.WriteLine("game init");
+         
+            #region attributs_Gui.cs
+            Label labelGameInfo = new Label("------ GAME INFO ------")
+            {
+                X = 3,
+                Y = 3,
+            };
+            Label labelPseudo = new Label("Pseudo : " + player.pseudo)
+            {
+                X = 3,
+                Y = 4,
+            };
+            Label labelManche = new Label("Nombre de Manches : " + nbManches)
+            {
+                X = 3,
+                Y = 5,
+            };
+            Label labelDiff = new Label("Difficulté : " + difficulte)
+            {
+                X = 3,
+                Y = 6,
+            };
+            Label LabelInfoMapGame = new Label(" # =  Depart Ennemi  \r\n B = Finalité a protégés  \r\n H = Chemin Ennemi \r\n 0 = Emplacement tours sur la carte "){
+                X = 3,
+                Y = 10
+            };
+          
+            #endregion
 
+          
+            gameWindows.Add(labelGameInfo,labelManche,labelPseudo,labelDiff,LabelInfoMapGame);
+            top.Remove(prevWindows);
+            gameWindows.ColorScheme = Colors.Dialog;
+            top.Add(gameWindows);
+            Application.Run();
             //Launch();
         }
 

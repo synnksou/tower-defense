@@ -17,10 +17,6 @@ namespace tower_defense
             for(int i=0;i<computeNbEnemies(nb);i++){
                 this.ennemies.Add(computeEnemies(new Random().Next(2)));    
             }
-            
-            //!to delete
-            Console.WriteLine("manche n°"+(nb));
-            ennemies.ForEach(e => Console.WriteLine(e.Nom));
         }
 
         private int computeNbEnemies(int nb){
