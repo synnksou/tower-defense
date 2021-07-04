@@ -151,6 +151,8 @@ namespace tower_defense
                 Height = Dim.Fill()
             };
 
+            PseudoWindow.ColorScheme = Colors.Dialog;
+
             var nameLabel = new Label(3, 5, "Pseudo");
 
             var nameText = new TextField("")
@@ -199,10 +201,10 @@ namespace tower_defense
             #endregion
 
 
-            top.Add(nameLabel);
-            top.Add(nameText);
-            top.Add(saveButton);
-            top.Add(exitButton);
+            PseudoWindow.Add(nameLabel);
+            PseudoWindow.Add(nameText);
+            PseudoWindow.Add(saveButton);
+            PseudoWindow.Add(exitButton);
 
             top.Remove(previousWin);
             top.Add(PseudoWindow);
@@ -224,6 +226,10 @@ namespace tower_defense
                 Width = Dim.Fill(),
                 Height = Dim.Fill()
             };
+
+            creditWindows.ColorScheme = Colors.Dialog;
+
+
             var stringCredit = new String("L'application Tower-Defense a été realisé en colaboration avec Flinois Dyklan, Brailly Julien, Heinrich Antoine ");
             var stringCreditAntoine = new String("Developpeur   Heinrich Antoine");
             var stringCreditDyklan = new String("Developpeur   Flinois Dyklan");
@@ -275,7 +281,11 @@ namespace tower_defense
                 Y = 1,
                 Width = Dim.Fill(),
                 Height = Dim.Fill()
-            };            
+            };   
+
+            optionsWindows.ColorScheme = Colors.Dialog;
+            
+
             var title = new String("Settings Game");
             var sound = new String("Play Music / Stop Music");
             var titleLabel = new Label(title) { X = 3, Y = 5 };
